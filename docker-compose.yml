@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  sqlsrv:
+    image: mcr.microsoft.com/mssql/server:2019-CU10-ubuntu-20.04
+    container_name: sqlsrv_lms
+    user: root
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: MyPasswordIsVery,VeryStr0ng
+      MSSQL_PID: Developer
+    ports:
+      - 1433:1433
+    volumes:
+      - sqlsrv_data:/var/opt/mssql/data
+      - sqlsrv_logs:/var/opt/mssql/logs
+      - sqlsrv_secrets:/var/opt/mssql/secrets
+volumes:
+  sqlsrv_data:
+    external: true
+  sqlsrv_logs:
+    external: true
+  sqlsrv_secrets:
+    external: true
