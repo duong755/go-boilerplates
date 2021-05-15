@@ -13,7 +13,7 @@ go get github.com/gorilla/mux
 ```shell
 git submodule add https://github.com/go-swagger/go-swagger
 
-go install ./go-swagger/cmd/swagger # this will create `~/go/bin/swagger` (`~/go/bin/swagger.exe`) executable file
+cd ./go-swagger && go install ./cmd/swagger # this will create `~/go/bin/swagger` (`~/go/bin/swagger.exe` on Windows) executable file
 ```
 
 - Create `doc.go` with `swagger:meta` annotation
