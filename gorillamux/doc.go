@@ -1,11 +1,10 @@
-// Package openlms API
+// OpenLMS APIs
 //
 //     Schemes: http, https
-//     Host: localhost:3333
 //     BasePath: /api/v1
 //     Version: 0.0.1
 //     License: MIT http://opensource.org/licenses/MIT
-//     Contact: Ngo Quang Duong<ngo.quang.duong.1100@gmail.com> https://github.com/duong755/swagger-examples
+//     Contact: Ngo Quang Duong<ngo.quang.duong.1100@gmail.com> https://github.com/duong755
 //
 //     Consumes:
 //     - application/json

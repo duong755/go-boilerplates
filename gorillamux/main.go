@@ -11,7 +11,10 @@ import (
 )
 
 // swagger:response successResponse
-type successResponse = string
+type SuccessResponse struct {
+	// in: body
+	Body string
+}
 
 func main() {
 	rootRouter := mux.NewRouter()
@@ -35,11 +38,11 @@ func main() {
 	//
 	//     Deprecation: false
 	//
-	//     Response:
+	//     Responses:
 	//       200: successResponse
 	//
 	apiV1Router.HandleFunc("/", func(resWriter http.ResponseWriter, req *http.Request) {
-		resWriter.Header().Add("Content-Type", "application/json")
+		resWriter.Header().Add("Content-Type", "application/text")
 		resWriter.WriteHeader(http.StatusOK)
 		resWriter.Write([]byte("gorilla mux"))
 	}).Methods(http.MethodGet)
@@ -58,7 +61,7 @@ func main() {
 		resWriter.WriteHeader(http.StatusOK)
 		resWriter.Write(swaggerJSON)
 	})
-	swaggerOpts := middleware.SwaggerUIOpts{SpecURL: "/api/v1/swagger.json", BasePath: "/api/v1", Path: "docs"}
+	swaggerOpts := middleware.SwaggerUIOpts{SpecURL: "/api/v1/swagger.json", BasePath: "/api/v1", Path: "docs", Title: "OpenLMS API Documentation"}
 	swaggerMiddleware := middleware.SwaggerUI(swaggerOpts, nil)
 	apiV1Router.Handle("/docs", swaggerMiddleware)
 

@@ -25,3 +25,4 @@ swagger serve -F swagger ./swagger.json
 ```
 
 - Serve `swagger.json` file and Swagger UI
+- Edit `swagger:response` by adding `in: body`
