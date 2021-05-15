@@ -7,3 +7,19 @@ go get github.com/gorilla/mux
 ```
 
 - Create `main.go`
+
+# 2021/05/15
+
+```shell
+git submodule add https://github.com/go-swagger/go-swagger
+
+go install ./go-swagger/cmd/swagger # this will create `~/go/bin/swagger` (`~/go/bin/swagger.exe`) executable file
+```
+
+- Create `doc.go` with `swagger:meta` annotation
+
+```shell
+swagger generate spec . > swagger.json # Generate spec file from code (with annotations, of course)
+
+swagger serve --flavor=swagger ./swagger.json
+```

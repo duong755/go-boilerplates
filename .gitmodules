@@ -1,0 +1,3 @@
+[submodule "gorillamux/go-swagger"]
+	path = gorillamux/go-swagger
+	url = https://github.com/go-swagger/go-swagger
