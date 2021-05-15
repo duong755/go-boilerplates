@@ -1,7 +1,7 @@
 // Package openlms API
 //
 //     Schemes: http, https
-//     Host: localhost:3000
+//     Host: localhost:3333
 //     BasePath: /api/v1
 //     Version: 0.0.1
 //     License: MIT http://opensource.org/licenses/MIT

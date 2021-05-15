@@ -21,5 +21,7 @@ cd ./go-swagger && go install ./cmd/swagger # this will create `~/go/bin/swagger
 ```shell
 swagger generate spec . > swagger.json # Generate spec file from code (with annotations, of course)
 
-swagger serve --flavor=swagger ./swagger.json
+swagger serve -F swagger ./swagger.json
 ```
+
+- Serve `swagger.json` file and Swagger UI
