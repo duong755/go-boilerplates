@@ -65,5 +65,6 @@ func main() {
 	swaggerMiddleware := middleware.SwaggerUI(swaggerOpts, nil)
 	apiV1Router.Handle("/docs", swaggerMiddleware)
 
+	println("Listening on port 3333 - http://localhost:3333/api/v1/docs")
 	http.ListenAndServe(":3333", rootRouter)
 }
