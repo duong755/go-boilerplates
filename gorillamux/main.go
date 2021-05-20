@@ -19,6 +19,9 @@ type SuccessResponse struct {
 func main() {
 	rootRouter := mux.NewRouter()
 
+	fileServer := http.FileServer(http.Dir("./static"))
+	rootRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fileServer))
+
 	apiV1Router := rootRouter.PathPrefix("/api/v1").Subrouter()
 
 	// swagger:route GET / demo demoRoot
@@ -61,7 +64,17 @@ func main() {
 		resWriter.WriteHeader(http.StatusOK)
 		resWriter.Write(swaggerJSON)
 	})
-	swaggerOpts := middleware.SwaggerUIOpts{SpecURL: "/api/v1/swagger.json", BasePath: "/api/v1", Path: "docs", Title: "OpenLMS API Documentation"}
+	swaggerOpts := middleware.SwaggerUIOpts{
+		SpecURL:          "/api/v1/swagger.json",
+		BasePath:         "/api/v1",
+		Path:             "docs",
+		Title:            "OpenLMS API Documentation",
+		SwaggerURL:       "/static/swagger-ui-bundle.js",
+		SwaggerPresetURL: "/static/swagger-ui-standalone-preset.js",
+		SwaggerStylesURL: "/static/swagger-ui.css",
+		Favicon16:        "/static/favicon-16x16.png",
+		Favicon32:        "/static/favicon-32x32.png",
+	}
 	swaggerMiddleware := middleware.SwaggerUI(swaggerOpts, nil)
 	apiV1Router.Handle("/docs", swaggerMiddleware)
 

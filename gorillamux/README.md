@@ -30,3 +30,12 @@ swagger serve -F swagger ./swagger.json
 # 2021-05-18
 
 - Print message before serving http
+
+# 2021-05-20
+
+- Downloads and serve static files, use these instead of CDN:
+    - `swagger-ui.css`
+    - `swgger-ui-bundle.js`
+    - `swagger-ui-standalone-preset.js`
+    - `favicon-16x16.png`
+    - `favicon-32x32.png`
