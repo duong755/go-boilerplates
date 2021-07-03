@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 declare -a volumes_array=(sqlsrv_data sqlsrv_logs sqlsrv_secrets)
 
