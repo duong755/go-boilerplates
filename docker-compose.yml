@@ -5,8 +5,9 @@ services:
     user: root
     environment:
       ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD: MyPasswordIsVery,VeryStr0ng
       MSSQL_PID: Developer
+    env_file:
+      - .env
     ports:
       - 1433:1433
     volumes:

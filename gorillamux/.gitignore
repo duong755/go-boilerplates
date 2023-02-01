@@ -16,3 +16,9 @@ vendor/
 
 # Swagger
 swagger.json
+
+# key and cert
+*.pem
+
+# .env
+.env

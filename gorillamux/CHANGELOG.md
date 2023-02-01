@@ -1,12 +1,22 @@
-# 2021/05/14
+# 2023-02-01
 
-```shell
-go mod init openlms
+- Use go 1.19
+- Use https
+- Write README.md
+- Rewrite Makefile's spec target
 
-go get github.com/gorilla/mux
-```
+# 2021-05-20
 
-- Create `main.go`
+- Downloads and serve static files, use these instead of CDN:
+    - `swagger-ui.css`
+    - `swgger-ui-bundle.js`
+    - `swagger-ui-standalone-preset.js`
+    - `favicon-16x16.png`
+    - `favicon-32x32.png`
+
+# 2021-05-18
+
+- Print message before serving http
 
 # 2021/05/15
 
@@ -27,15 +37,14 @@ swagger serve -F swagger ./swagger.json
 - Serve `swagger.json` file and Swagger UI
 - Edit `swagger:response` by adding `in: body`
 
-# 2021-05-18
 
-- Print message before serving http
 
-# 2021-05-20
+# 2021/05/14
 
-- Downloads and serve static files, use these instead of CDN:
-    - `swagger-ui.css`
-    - `swgger-ui-bundle.js`
-    - `swagger-ui-standalone-preset.js`
-    - `favicon-16x16.png`
-    - `favicon-32x32.png`
+```shell
+go mod init github.com/duong755/go-boilerplates
+
+go get github.com/gorilla/mux
+```
+
+- Create `main.go`

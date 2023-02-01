@@ -7,7 +7,7 @@ spec:
 	@echo 'Installing ./cmd/swagger'
 	@cd ./go-swagger && go install ./cmd/swagger
 	@echo 'Generating swagger.json ...'
-	@~/go/bin/swagger generate spec . > swagger.json
+	@swagger generate spec . > swagger.json
 	@echo 'Generated swagger.json'
 
 server: spec
