@@ -22,6 +22,16 @@ func main() {
 	fileServer := http.FileServer(http.Dir("./static"))
 	rootRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fileServer))
 
+	v1Router(rootRouter)
+	swaggerRouter(rootRouter)
+
+	println("Listening on port 3333 - https://localhost:3333/docs")
+	certFile := "./localhost.pem"
+	keyFile := "./localhost-key.pem"
+	http.ListenAndServeTLS(":3333", certFile, keyFile, rootRouter)
+}
+
+func v1Router(rootRouter *mux.Router) {
 	apiV1Router := rootRouter.PathPrefix("/api/v1").Subrouter()
 
 	// swagger:route GET / demo demoRoot
@@ -49,7 +59,9 @@ func main() {
 		resWriter.WriteHeader(http.StatusOK)
 		resWriter.Write([]byte("gorilla mux"))
 	}).Methods(http.MethodGet)
+}
 
+func swaggerRouter(rootRouter *mux.Router) {
 	specDocument, specErr := loads.Spec("./swagger.json")
 	if specErr != nil {
 		log.Fatal(specErr)
@@ -59,27 +71,17 @@ func main() {
 		log.Fatal(marshalErr)
 	}
 
-	apiV1Router.HandleFunc("/swagger.json", func(resWriter http.ResponseWriter, req *http.Request) {
+	rootRouter.HandleFunc("/swagger.json", func(resWriter http.ResponseWriter, req *http.Request) {
 		resWriter.Header().Add("Content-Type", "application/json")
 		resWriter.WriteHeader(http.StatusOK)
 		resWriter.Write(swaggerJSON)
 	})
 	swaggerOpts := middleware.SwaggerUIOpts{
-		SpecURL:          "/api/v1/swagger.json",
-		BasePath:         "/api/v1",
-		Path:             "docs",
-		Title:            "OpenLMS API Documentation",
-		SwaggerURL:       "/static/swagger-ui-bundle.js",
-		SwaggerPresetURL: "/static/swagger-ui-standalone-preset.js",
-		SwaggerStylesURL: "/static/swagger-ui.css",
-		Favicon16:        "/static/favicon-16x16.png",
-		Favicon32:        "/static/favicon-32x32.png",
+		SpecURL:  "/swagger.json",
+		BasePath: "/",
+		Path:     "docs",
+		Title:    "Demo API Documentation",
 	}
 	swaggerMiddleware := middleware.SwaggerUI(swaggerOpts, nil)
-	apiV1Router.Handle("/docs", swaggerMiddleware)
-
-	println("Listening on port 3333 - https://localhost:3333/api/v1/docs")
-	certFile := "./localhost.pem"
-	keyFile := "./localhost-key.pem"
-	http.ListenAndServeTLS(":3333", certFile, keyFile, rootRouter)
+	rootRouter.Handle("/docs", swaggerMiddleware)
 }
