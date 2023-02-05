@@ -1,23 +1,15 @@
 services:
-  sqlsrv:
-    image: mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04
-    container_name: sqlsrv
-    user: root
+  pg_srv:
+    image: "postgres:15.1-alpine3.17"
+    restart: "always"
+    ports:
+      - "5432:5432"
     environment:
-      ACCEPT_EULA: Y
-      MSSQL_PID: Developer
+      PGDATA: /var/lib/postgresql/data/pgdata
     env_file:
       - .env
-    ports:
-      - 1433:1433
     volumes:
-      - sqlsrv_data:/var/opt/mssql/data
-      - sqlsrv_logs:/var/opt/mssql/logs
-      - sqlsrv_secrets:/var/opt/mssql/secrets
+      - pg_srv_data:/var/lib/postgresql/data
 volumes:
-  sqlsrv_data:
-    external: true
-  sqlsrv_logs:
-    external: true
-  sqlsrv_secrets:
+  pg_srv_data:
     external: true
