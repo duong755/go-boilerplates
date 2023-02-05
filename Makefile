@@ -1,6 +1,6 @@
 SHELL=/usr/bin/bash
 
-.PHONY: aspnetcore gorillamux
+.PHONY: gorillamux
 
 all:
 
@@ -9,9 +9,6 @@ compose: volumes
 
 volumes:
 	@$(SHELL) ./volumes.sh
-
-aspnetcore:
-	@$(MAKE) -C ./aspnetcore
 
 gorillamux:
 	@$(MAKE) -C ./gorillamux
