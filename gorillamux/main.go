@@ -19,8 +19,8 @@ type SuccessResponse struct {
 func main() {
 	rootRouter := mux.NewRouter()
 
-	fileServer := http.FileServer(http.Dir("./static"))
-	rootRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fileServer))
+	// fileServer := http.FileServer(http.Dir("./static"))
+	// rootRouter.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fileServer))
 
 	v1Router(rootRouter)
 	swaggerRouter(rootRouter)
@@ -28,13 +28,14 @@ func main() {
 	println("Listening on port 3333 - https://localhost:3333/docs")
 	certFile := "./localhost.pem"
 	keyFile := "./localhost-key.pem"
-	http.ListenAndServeTLS(":3333", certFile, keyFile, rootRouter)
+
+	log.Fatal(http.ListenAndServeTLS(":3333", certFile, keyFile, rootRouter))
 }
 
 func v1Router(rootRouter *mux.Router) {
 	apiV1Router := rootRouter.PathPrefix("/api/v1").Subrouter()
 
-	// swagger:route GET / demo demoRoot
+	// swagger:route GET /api/v1/ demo demoRoot
 	//
 	// Return a string
 	//
@@ -47,7 +48,7 @@ func v1Router(rootRouter *mux.Router) {
 	//     Produces:
 	//     - application/text
 	//
-	//     Schemes: http, https
+	//     Schemes: https
 	//
 	//     Deprecation: false
 	//

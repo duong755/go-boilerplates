@@ -1,6 +1,6 @@
 // Demo APIs
 //
-//	Schemes: http, https
+//	Schemes: https
 //	BasePath: /
 //	Version: 0.0.1
 //	License: MIT http://opensource.org/licenses/MIT

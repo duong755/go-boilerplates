@@ -1,3 +1,8 @@
+# 2023-02-05
+
+- Delete static files
+- Use https only
+
 # 2023-02-01
 
 - Use go 1.19
