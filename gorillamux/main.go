@@ -13,7 +13,13 @@ import (
 // swagger:response successResponse
 type SuccessResponse struct {
 	// in: body
-	Body string
+	Body SuccessBody
+}
+
+type SuccessBody struct {
+	// hello world
+	// Required: true
+	Message string `json:"message"`
 }
 
 func main() {
@@ -46,7 +52,7 @@ func v1Router(rootRouter *mux.Router) {
 	//     - application/xml
 	//
 	//     Produces:
-	//     - application/text
+	//     - application/json
 	//
 	//     Schemes: https
 	//
@@ -56,9 +62,10 @@ func v1Router(rootRouter *mux.Router) {
 	//       200: successResponse
 	//
 	apiV1Router.HandleFunc("/", func(resWriter http.ResponseWriter, req *http.Request) {
-		resWriter.Header().Add("Content-Type", "application/text")
+		resWriter.Header().Add("Content-Type", "application/json")
 		resWriter.WriteHeader(http.StatusOK)
-		resWriter.Write([]byte("gorilla mux"))
+		resBody, _ := json.MarshalIndent(SuccessBody{Message: "hello world"}, "", "  ")
+		resWriter.Write(resBody)
 	}).Methods(http.MethodGet)
 }
 
@@ -81,7 +88,7 @@ func swaggerRouter(rootRouter *mux.Router) {
 		SpecURL:  "/swagger.json",
 		BasePath: "/",
 		Path:     "docs",
-		Title:    "Demo API Documentation",
+		Title:    "Demo APIs Documentation",
 	}
 	swaggerMiddleware := middleware.SwaggerUI(swaggerOpts, nil)
 	rootRouter.Handle("/docs", swaggerMiddleware)

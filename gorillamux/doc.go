@@ -1,5 +1,6 @@
 // Demo APIs
 //
+//	Title: Demo APIs Documentation
 //	Schemes: https
 //	BasePath: /
 //	Version: 0.0.1
